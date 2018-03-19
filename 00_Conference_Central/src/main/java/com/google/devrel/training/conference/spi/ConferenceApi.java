@@ -8,7 +8,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Named;
-
+import com.google.appengine.api.memcache.MemcacheService; 
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.cmd.Query;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -20,6 +21,7 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.google.devrel.training.conference.Constants;
 import com.google.devrel.training.conference.domain.Profile;
+import com.google.devrel.training.conference.domain.Announcement;
 import com.google.devrel.training.conference.domain.Conference;
 import com.google.devrel.training.conference.form.ProfileForm;
 import com.google.devrel.training.conference.form.ConferenceForm;
@@ -466,5 +468,27 @@ public Collection<Conference> getConferencesToAttend(final User user)
          }
      return ofy().load().keys(keys).values();
 }
+
+
+@ApiMethod(
+	    name="getAnnouncement",
+	    path = "announcement",
+	    httpMethod = HttpMethod.GET
+	    )
+	    public Announcement getAnnouncement(){
+	    //TODO GET announcement from memcache by key and if it exist return it
+
+	MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
+	Object message = memcacheService.get(Constants.MEMCACHE_ANNOUNCEMENTS_KEY);
+	      if(message != null)
+           return new Announcement(message.toString());
+	    
+	    return null;
+	    }
+
+
+
+
+
 
 }
