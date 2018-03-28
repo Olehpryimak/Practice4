@@ -57,6 +57,12 @@ public class Profile {
      * Just making the default constructor private.
      */
     private Profile() {}
+    
+    public void update(String displayName2, TeeShirtSize teeShirtSize2) {
+		this.displayName = displayName2;
+		this.teeShirtSize = teeShirtSize2;
+		
+	}
 
     public List<String> getConferenceKeysToAttend() {
         return ImmutableList.copyOf(conferenceKeysToAttend);

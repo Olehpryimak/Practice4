@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"OQKfQPkpHu0nIKZBNBdt47Yvjvo/RpIH549-1UdMmjI0_qfcUlVbJBc\"",
+ "etag": "\"OQKfQPkpHu0nIKZBNBdt47Yvjvo/PfO833O71dx2p3A5pitix_x1nbw\"",
  "discoveryVersion": "v1",
  "id": "conference:v1",
  "name": "conference",
@@ -69,6 +69,15 @@
   }
  },
  "schemas": {
+  "Announcement": {
+   "id": "Announcement",
+   "type": "object",
+   "properties": {
+    "message": {
+     "type": "string"
+    }
+   }
+  },
   "Conference": {
    "id": "Conference",
    "type": "object",
@@ -328,6 +337,16 @@
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
+  "conference.getAnnouncement": {
+   "id": "conference.getAnnouncement",
+   "allowGet": true,
+   "returns": {
+    "$ref": "Announcement"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "conference.getConference": {
    "id": "conference.getConference",
    "allowGet": true,
@@ -432,6 +451,24 @@
    ],
    "returns": {
     "$ref": "Profile"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "conference.unregisterFromConference": {
+   "id": "conference.unregisterFromConference",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "returns": {
+    "$ref": "WrappedBoolean"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
